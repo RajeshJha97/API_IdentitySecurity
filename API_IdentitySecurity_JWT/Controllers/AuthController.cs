@@ -41,6 +41,7 @@ namespace API_IdentitySecurity_JWT.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public ActionResult<APIResponse> SignIn([FromBody] SignIn user)
         {
             try

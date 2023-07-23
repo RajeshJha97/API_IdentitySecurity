@@ -39,7 +39,7 @@ builder.Services.AddAuthentication(options => {
 
 builder.Services.AddAuthorization(options => {
 
-    options.AddPolicy("AdminOnly", policy => policy.RequireClaim("Admin"));
+    options.AddPolicy("AdminOnly", policy => policy.RequireClaim("Admin").RequireClaim("Manager"));
 });
 
 
