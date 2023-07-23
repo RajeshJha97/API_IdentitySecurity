@@ -27,15 +27,7 @@ namespace API_IdentitySecurity_JWT.Controllers
             _token = new();
         }
 
-        [HttpGet("TestSecretKey")]
-        public ActionResult<APIResponse> TestSecretKey()
-        {
-            _resp.StatusCode=HttpStatusCode.OK;
-            _resp.IsSuccess=true;
-            _resp.Result = $"{secretKey}, count: {secretKey.Length}";
-            return Ok(_resp);
-        }
-
+       
         [HttpPost("User Registration")]
         public ActionResult<APIResponse> UserRegister([FromBody] RegisterDTO userRegister)
         {
@@ -46,10 +38,20 @@ namespace API_IdentitySecurity_JWT.Controllers
         }
 
         [HttpPost("SignIn")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<APIResponse> SignIn([FromBody] SignIn user)
         {
             try
             {
+                if (user == null)
+                {
+                    _resp.StatusCode=HttpStatusCode.BadRequest;
+                    _resp.Result = "Please enter a valid request";
+                    return BadRequest(_resp);
+                }
+
                 if (user.Username.ToLower() == "admin" && user.Password == "password")
                 {
                     List<Claim> claims = new List<Claim>()

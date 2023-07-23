@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API_IdentitySecurity_JWT.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize(Policy ="AdminOnly")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
