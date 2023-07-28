@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace API_IdentitySecurity_JWT.Utilities
+namespace API_IdentitySecurity_JWT.Models
 {
     public class APIResponse
     {

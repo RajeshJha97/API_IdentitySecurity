@@ -28,7 +28,7 @@ namespace API_IdentitySecurity_JWT.Controllers
         }
 
        
-        [HttpPost("User Registration")]
+        [HttpPost("UserRegistration")]
         public ActionResult<APIResponse> UserRegister([FromBody] RegisterDTO userRegister)
         {
             _resp.StatusCode=HttpStatusCode.OK;

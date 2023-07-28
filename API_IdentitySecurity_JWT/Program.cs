@@ -1,5 +1,8 @@
+using API_IdentitySecurity_JWT.Data;
 using API_IdentitySecurity_JWT.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -11,6 +14,23 @@ builder.Services.AddControllers();
 
 //automapper
 builder.Services.AddAutoMapper(typeof(MappingConfig));
+
+//SQL server connection
+builder.Services.AddDbContext<ApplicationDbContext>(options => {
+
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
+});
+
+//Configuring Identity
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => {
+
+    options.Password.RequiredLength = 8;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireUppercase = true;
+
+    options.Lockout.MaxFailedAccessAttempts = 5;
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
+}).AddEntityFrameworkStores<ApplicationDbContext>();
 
 var secretKey = builder.Configuration.GetValue<string>("SecretKey");
 var key=Encoding.ASCII.GetBytes(secretKey);
