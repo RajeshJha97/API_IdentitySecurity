@@ -5,7 +5,7 @@ namespace API_IdentitySecurity_JWT.Models
     public class Registration
     {
         [Required]
-        public string Username { get; set; }
+        public string Email { get; set; }
         
         [Required]
         [DataType(DataType.Password)]

@@ -30,6 +30,9 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => {
 
     options.Lockout.MaxFailedAccessAttempts = 5;
     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
+    //unique email
+    options.User.RequireUniqueEmail = true;
+
 }).AddEntityFrameworkStores<ApplicationDbContext>();
 
 var secretKey = builder.Configuration.GetValue<string>("SecretKey");
